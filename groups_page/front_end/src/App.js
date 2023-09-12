@@ -61,8 +61,12 @@ function App() {
   }
 
   const handleSearchSubmit = (List) => {
+
     console.log(`Searching for: ${searchInput}`);
-      let filtered = List.filter((user)=> user.name.includes(searchInput) || user.role.includes(searchInput))
+      let filtered = List.filter((user) => 
+        user.name.toLowerCase().includes(searchInput.toLowerCase()) || 
+        user.role.toLowerCase().includes(searchInput.toLowerCase())
+      );
       console.log(filtered)
       setIsFiltered(filtered);
     }
@@ -157,7 +161,7 @@ function App() {
             value={searchInput}
             onChange={handleSearchChange} />
           </form>
-          <button className='buttonsearch' onClick={()=>{handleSearchSubmit(data)}} type='sumbit'><span className="material-symbols-outlined">manage_search</span></button>
+          <button className='buttonsearch' onClick={()=>{handleSearchSubmit(isFilter)}} type='sumbit'><span className="material-symbols-outlined">manage_search</span></button>
        </div>
        
     <div className='radio_button'>

@@ -155,6 +155,7 @@ select{
   display: flex;
   flex-direction: column;
   font-size: 19px;
+  margin-top: 8px;
 }
 
 .radio_button{
