@@ -12,8 +12,9 @@ function App() {
   const [IsDeleted,setIsDeleted]       = useState(0);
   const [isFilter,setIsFiltered]       = useState([]);
   const [filterData,setFilterData]     = useState([]);
-  const [filteredData,setFilteredData] = useState([]);
+  const [,setFilteredData]             = useState([]);
   const [searchInput,setSearchInput]   = useState('');
+  const [selectedValue, setSelectedValue] = useState('option1');
 
   useEffect( () => {
     getdata();  
@@ -108,10 +109,14 @@ function App() {
     setFilterData(filtered)
   }
 
+  const handleRoleChange = (event) => {
+    setSelectedValue(event.target.value);
+  }
+
   return (
     <div className="App">
       <div className='topbar'>
-      <img src="/image.png" className='logo'/>
+      <img src="/image.png" className='logo' alt="Lyric_Tranxify_Logo"/>
       <div className='top_search'>
         <button className='find'><span class="material-symbols-outlined icon">search</span></button>
         <input  className="search" type="text" id="text" placeholder="Search.."></input>
@@ -147,9 +152,9 @@ function App() {
           <button className='buttonsearch' onClick={()=>{handleSearchSubmit(isFilter)}} type='sumbit'><span className="material-symbols-outlined">manage_search</span></button>
        </div>   
     <div className='radio_button'>
-       <input type="radio" name="usertype" value="BOTH" onClick={()=>{ filterByBoth(data)}} />Both
-       <input type="radio" name="usertype" value="translator" onClick={()=>{filterByTra(data)}} />Translator
-       <input type="radio" name="usertype" value="Reviewer" onClick={()=>{ filterByRev(data)}} />Reviewer
+       <input type="radio" name="usertype" value="option1" onClick={()=>{ filterByBoth(data)}} checked={selectedValue === 'option1'} onChange={handleRoleChange}/>Both
+       <input type="radio" name="usertype" value="option2" onClick={ ()=>{filterByTra(data)}} checked={selectedValue === 'option2'} onChange={handleRoleChange}/>Translator
+       <input type="radio" name="usertype" value="option3" onClick={()=>{ filterByRev(data)}} checked={selectedValue === 'option3'} onChange={handleRoleChange}/>Reviewer
     </div>
     <table class="table table-striped table-hover">
         <thead>
