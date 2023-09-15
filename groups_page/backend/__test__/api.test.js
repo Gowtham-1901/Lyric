@@ -29,13 +29,13 @@ describe('Get /fetch', () => {
 describe("Update /edit data", () => {
 
     it('Should edit the data in the backend', async() => {
-        const payload = {"role" : "Reviewer", "id" : 3}
+        const payload = {"role" : "Reviewer", "id" : 8}
         const res = await request(app).put('/updateuserdata/:id').send(payload);
         expect(res.status).toBe(200);
     })
 
     it('Should edit data within 200ms', async() => {
-        const payload = {"role" : "Translator", "id" : 4}
+        const payload = {"role" : "Translator", "id" : 21}
         const startTime = Date.now();
         const res = await request(app).put('/updateuserdata/:id').send(payload);
         const endTime = Date.now();
@@ -45,7 +45,7 @@ describe("Update /edit data", () => {
     })
 
     it('Error -> ID does exists', async() => {
-        const payload = {"role" : "Reviewer", "id" : 25}
+        const payload = {"role" : "Reviewer", "id" : 27}
         const res = await request(app).put('/updateuserdata:/id').send(payload);
         expect(res.status).toBe(404);
     })
@@ -56,13 +56,13 @@ describe("Update /edit data", () => {
 describe('Delete /remove data', () => {
 
     it('Should delete a data', async() => {
-        const payload = { "id" : 3 }
+        const payload = { "id" : 8 }
         const res = await request(app).delete('/deleteuserdata').send(payload);
         expect(res.status).toBe(200);
     })
 
     it('Should delete data within 200ms', async() => {
-        const payload = { "id" : 4}
+        const payload = { "id" : 21}
         const startTime = Date.now();
         const res = await request(app).delete('/deleteuserdata').send(payload);
         const endTime = Date.now();
