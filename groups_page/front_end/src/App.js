@@ -6,7 +6,6 @@ import 'bootstrap/js/dist/modal.js';
 
 function App() {
   const titles = ["Name","Role","",""];
-  // const [searchTerm,setSearchTerm]  = useState('');
   const [data,setData]                 = useState([]);
   const [UpdatedRole,setUpdatedRole]   = useState('');
   const [IsDeleted,setIsDeleted]       = useState(0);
@@ -17,7 +16,7 @@ function App() {
   const [selectedValue, setSelectedValue] = useState('option1');
 
   useEffect( () => {
-    getdata();  
+    getdata();
   },[IsDeleted])
 
   const getdata = async() => {
@@ -36,7 +35,7 @@ function App() {
   const handleRole = async(event) => {
     try{
       let role =event.target.value
-      setUpdatedRole(role)  	
+      setUpdatedRole(role)
     }catch(error) {
       console.error(error);
     }
@@ -56,16 +55,15 @@ function App() {
 
   const handleSearchSubmit = (List) => {
     console.log(`Searching for: ${searchInput}`);
-      let filtered = List.filter((user) => 
-        user.name.toLowerCase().startsWith(searchInput.toLowerCase()) 
+      let filtered = List.filter((user) =>
+        user.name.toLowerCase().startsWith(searchInput.toLowerCase())
         );
         setIsFiltered(data);
         setFilterData(filtered);
     }
-       
+
   const handleChange = async(res) => {
     try{
-      
       const response = await axios.put(`http://localhost:3008/updateuserdata/${res}`, {role :UpdatedRole, id: res} )
       console.log(response)
     }catch(error) {
@@ -79,7 +77,6 @@ function App() {
       try{
         await axios.delete(`http://localhost:3008/deleteuserdata`, {data})
         console.log("Data deleted")
-  
       }catch(error){
         console.log(error);
       }
@@ -121,7 +118,6 @@ function App() {
         <button className='find'><span class="material-symbols-outlined icon">search</span></button>
         <input  className="search" type="text" id="text" placeholder="Search.."></input>
       </div>
-      {/* <button className='lens'> 🔍 </button> */}
       <div className='profile'>
           <button className='notification'><span class="material-symbols-outlined">notifications</span></button>
           <button className='account'><span class="material-symbols-outlined">account_circle</span></button>
@@ -145,7 +141,7 @@ function App() {
           <form onSubmit={handleSearchSubmit}>
             <input className='web'
               type='text'
-              placeholder='filter with name or role' 
+              placeholder='filter with name' 
               value={searchInput}
               onChange={handleSearchChange} />
           </form>

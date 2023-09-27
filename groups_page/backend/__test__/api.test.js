@@ -1,5 +1,7 @@
+/* jslint es6 */
+/* jslint node */
 const request = require('supertest');
-const app = require('../app');
+const app = require('../controller');
 
 // Get testing
 
@@ -13,7 +15,7 @@ describe('Get /fetch', () => {
         const startTime = Date.now();
         const res = await request(app).get('/getuserdata')
         const endTime = Date.now();
-        const resTime = endTime - startTime;
+        const resTime = endTime - startTime; 
         expect(res.status).toBe(200);
         expect(resTime).toBeLessThan(200);
     })
@@ -29,13 +31,13 @@ describe('Get /fetch', () => {
 describe("Update /edit data", () => {
 
     it('Should edit the data in the backend', async() => {
-        const payload = {"role" : "Reviewer", "id" : 8}
+        const payload = {"role" : "Reviewer", "id" : 2}
         const res = await request(app).put('/updateuserdata/:id').send(payload);
         expect(res.status).toBe(200);
     })
 
     it('Should edit data within 200ms', async() => {
-        const payload = {"role" : "Translator", "id" : 21}
+        const payload = {"role" : "Reviewer", "id" : 3}
         const startTime = Date.now();
         const res = await request(app).put('/updateuserdata/:id').send(payload);
         const endTime = Date.now();
@@ -45,8 +47,8 @@ describe("Update /edit data", () => {
     })
 
     it('Error -> ID does exists', async() => {
-        const payload = {"role" : "Reviewer", "id" : 27}
-        const res = await request(app).put('/updateuserdata:/id').send(payload);
+        const payload = {"role" : "Reviewer", "id" : 7}
+        const res = await request(app).put('/updateuserdata/:id').send(payload);
         expect(res.status).toBe(404);
     })
 })
@@ -56,13 +58,13 @@ describe("Update /edit data", () => {
 describe('Delete /remove data', () => {
 
     it('Should delete a data', async() => {
-        const payload = { "id" : 8 }
+        const payload = { "id" : 3}
         const res = await request(app).delete('/deleteuserdata').send(payload);
         expect(res.status).toBe(200);
     })
 
     it('Should delete data within 200ms', async() => {
-        const payload = { "id" : 21}
+        const payload = { "id" : 1}
         const startTime = Date.now();
         const res = await request(app).delete('/deleteuserdata').send(payload);
         const endTime = Date.now();
