@@ -31,13 +31,13 @@ describe('Get /fetch', () => {
 describe("Update /edit data", () => {
 
     it('Should edit the data in the backend', async() => {
-        const payload = {"role" : "Reviewer", "id" : 2}
+        const payload = {"role" : "Translator", "id" : "02"}
         const res = await request(app).put('/updateuserdata/:id').send(payload);
         expect(res.status).toBe(200);
     })
 
     it('Should edit data within 200ms', async() => {
-        const payload = {"role" : "Reviewer", "id" : 3}
+        const payload = {"role" : "Reviewer", "id" : "03"}
         const startTime = Date.now();
         const res = await request(app).put('/updateuserdata/:id').send(payload);
         const endTime = Date.now();
@@ -47,7 +47,7 @@ describe("Update /edit data", () => {
     })
 
     it('Error -> ID does exists', async() => {
-        const payload = {"role" : "Reviewer", "id" : 7}
+        const payload = {"role" : "Reviewer", "id" : "07"}
         const res = await request(app).put('/updateuserdata/:id').send(payload);
         expect(res.status).toBe(404);
     })
@@ -58,13 +58,13 @@ describe("Update /edit data", () => {
 describe('Delete /remove data', () => {
 
     it('Should delete a data', async() => {
-        const payload = { "id" : 3}
+        const payload = { "id" : "03"}
         const res = await request(app).delete('/deleteuserdata').send(payload);
         expect(res.status).toBe(200);
     })
 
     it('Should delete data within 200ms', async() => {
-        const payload = { "id" : 1}
+        const payload = { "id" : "01"}
         const startTime = Date.now();
         const res = await request(app).delete('/deleteuserdata').send(payload);
         const endTime = Date.now();
@@ -74,7 +74,7 @@ describe('Delete /remove data', () => {
     })
 
     it('Error -> id does not exist', async() => {
-        const payload = {"id" : 26}
+        const payload = {"id" : "26"}
         const res = await request(app).delete('/deleteuserdata').send(payload);
         expect(res.status).toBe(404);
     })

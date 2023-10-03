@@ -31,13 +31,13 @@ describe('Get /fetch', () => {
 describe("Update /edit data", () => {
 
     it('Should edit the data in the backend', async() => {
-        const payload = { "firstname" : "Mariya" , "secondname" : "Sugali" , "email" : "mariya@gmail.com" , "phone" :8747654556 , "language" : "English", "role" : "Translator" , "id" : 1} 
+        const payload = { "firstname" : "Arun" , "lastname" : "Kumar" , "email" : "arunkumar@gmail.com" , "phone" :8747754526 , "language" : "English", "role" : "Translator" , "id" : 2} 
         const res = await request(app).put('/editdata').send(payload);
         expect(res.status).toBe(200);
     })
 
     it('Should edit data within 200ms', async() => {
-        const payload = {"firstname" : "Rithick" , "secondname" : "Raman" , "email" : "rithick@gmail.com" , "phone" :8747655556 , "language" : "Tamil", "role" : "Reviewer" , "id" : 2}
+        const payload = {"firstname" : "Rithi" , "lastname" : "Ram" , "email" : "rithiram@gmail.com" , "phone" :8727659556 , "language" : "Tamil", "role" : "Reviewer" , "id" : 1}
         const startTime = Date.now();
         const res = await request(app).put('/editdata').send(payload);
         const endTime = Date.now();
@@ -47,7 +47,7 @@ describe("Update /edit data", () => {
     })
 
     it('Error -> ID does exists', async() => {
-        const payload = {"firstname" : "Pubg" , "secondname" : "Game" , "email" : "pubg@gmail.com" , "phone" :8747658556 , "language" : "English", "role" : "Translator" , "id" : 7}
+        const payload = {"firstname" : "Pubg" , "lastname" : "Game" , "email" : "pubg@gmail.com" , "phone" :8747658556 , "language" : "English", "role" : "Translator" , "id" : 5}
         const res = await request(app).put('/editdata').send(payload);
         expect(res.status).toBe(404);
     })

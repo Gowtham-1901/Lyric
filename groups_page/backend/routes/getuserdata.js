@@ -6,7 +6,7 @@ const pool = require("../config/db");
 
 // getting all the datas
 router.get('/getuserdata', async (req, res) => {
-    const result = await pool.query("SELECT * FROM user_table");
+    const result = await pool.query("SELECT * FROM user_table JOIN role ON user_table.role_id= role.role_id WHERE isactive = true");
     // console.log(result);
     res.status(200).json(result.rows);
 });

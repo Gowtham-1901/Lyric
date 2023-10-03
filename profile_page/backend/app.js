@@ -27,11 +27,11 @@ app.get('/', async (req, res) => {
 
 //edit user data
 app.put('/editdata', async (req, res) => {
-  const { firstname, secondname, email, phone, language, role } = req.body;
+  const { firstname, lastname, email, phone, language, role, id} = req.body;
     try {
       await pool.query(
-        "UPDATE profile SET firstname = $1, secondname = $2, email = $3, phone = $4, language = $5, role = $6 WHERE id = 1",
-        [firstname, secondname, email, phone, language, role]
+        "UPDATE profile SET firstname = $1, lastname = $2, email = $3, phone = $4, language = $5, role = $6 WHERE id = $7",
+        [firstname, lastname, email, phone, language, role, id]
       );
       res.status(200).json({ message: 'Profile updated successfully' });
     } catch (error) {
@@ -40,7 +40,7 @@ app.put('/editdata', async (req, res) => {
   });
   
 
-// cahnge user password
+// change user password
 app.put('/changepassword', async (req, res) => {
   try {
     const { oldPassword, newPassword } = req.body;

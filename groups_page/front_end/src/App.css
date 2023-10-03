@@ -1,38 +1,35 @@
 .App {
   text-align: center;
-
 }
 
-.blue{
-  background-color:#F5FCFF;
-  height:750px;
+.blue {
+  background-color: #f5fcff;
+  height: 750px;
   padding-left: 40px;
 }
 
-
-
-.navibar{
+.navibar {
   width: 280px;
   height: 750px;
-  float:left;
-  background-color:white;
+  float: left;
+  background-color: white;
 }
 
-.topbar{
+.topbar {
   width: 100%;
-  height:110px;
-  background-color:white;
+  height: 110px;
+  background-color: white;
   display: flex;
 }
 
-table{
+table {
   max-width: 1178px;
   max-height: 1178px;
   margin-left: 270px;
   margin-top: 30px;
 }
 
-.button{
+.button {
   max-width: 280px;
   height: 40px;
   background-color: transparent;
@@ -40,56 +37,55 @@ table{
   display: inline-flex;
 }
 
-button{
+button {
   border-color: transparent;
   background-color: transparent;
 }
 
-button:hover{
+button:hover {
   color: orangered;
 }
 
-.assign{
-  background-color: #2BB8E6;
+.assign {
+  background-color: #2bb8e6;
   border-radius: 5px;
 }
-.assign:hover{
+.assign:hover {
   background-color: transparent;
   color: orangered;
 }
 
-
-.delete{
+.delete {
   background-color: transparent;
 }
 
-.delete:hover{
+.delete:hover {
   background-color: transparent;
   color: orangered;
 }
 
-.update{
+.update {
   background-color: transparent;
 }
 
-.update:hover{
-  border-color:#2BB8E6;
+.update:hover {
+  border-color: #2bb8e6;
   color: orangered;
   border-radius: 5px;
 }
 
-select{
+select {
   background-color: transparent;
   border-color: lightgray;
 }
 
-.logo{
+.logo {
   height: 75px;
   width: 250px;
   padding-top: 20px;
 }
 
-.search{
+.search {
   padding-left: 10px;
   width: 400px;
   height: 40px;
@@ -98,49 +94,49 @@ select{
   align-content: center;
   border-color: transparent;
   background: #f2f2f2;
-} 
+}
 
-.search:hover{
+.search:hover {
   border-color: transparent;
 }
 
-.find{
+.find {
   width: 30px;
   /* padding-right: 50px; */
 }
 
-.find:hover{
+.find:hover {
   color: black;
 }
 
-.icon{
+.icon {
   background-color: #f2f2f2;
   align-self: center;
   align-content: center;
   height: 40px;
   padding-top: 8px;
-  
+
   /* margin-left: 500px; */
 }
 
-.top_search{
+.top_search {
   display: flex;
   margin-left: 400px;
 }
 
-.home{
+.home {
   background-color: transparent;
   display: inline-flex;
   padding: 10px;
 }
 
-.home:hover{
+.home:hover {
   font-size: large;
   transition: 0.5s ease-in-out;
   margin-right: 25px;
 }
 
-.buttonsearch{
+.buttonsearch {
   padding-bottom: 20px;
   display: inline-flex;
   /* margin-top: 10px; */
@@ -150,12 +146,12 @@ select{
   margin-left: 2px;
 }
 
-.buttonsearch:hover{
+.buttonsearch:hover {
   background-color: transparent;
   color: black;
 }
 
-.web{
+.web {
   width: 250px;
   align-content: center;
   align-self: center;
@@ -166,7 +162,7 @@ select{
   flex-direction: column;
 }
 
-.group{
+.group {
   float: left;
   display: flex;
   flex-direction: column;
@@ -174,28 +170,28 @@ select{
   margin-top: 8px;
 }
 
-.radio_button{
-   margin-top: 25px;
-   align-content: flex-start;
-   float: left;
-   padding-left: 33px;
-   margin-bottom: 30px;
+.radio_button {
+  margin-top: 25px;
+  align-content: flex-start;
+  float: left;
+  padding-left: 33px;
+  margin-bottom: 30px;
 }
-.searchelement{
+.searchelement {
   display: flex;
   padding-left: 30px;
   margin-top: 10px;
 }
 
-.backarrow{
+.backarrow {
   display: flex;
 }
 
-.topbar .profile{
+.topbar .profile {
   display: flex;
   margin-left: 350px;
 }
 
-.Group_button{
-  background-color: #F5FCFF;
+.Group_button {
+  background-color: #f5fcff;
 }
