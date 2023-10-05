@@ -5,33 +5,46 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/js/dist/modal.js";
 
 function App() {
+
   const titles = ["Name", "Role", "", ""];
-  const [data, setData] = useState([]);
   const [UpdatedRole, setUpdatedRole] = useState("");
   const [IsDeleted, setIsDeleted] = useState(0);
-  const [isFilter, setIsFiltered] = useState([]);
+  const [option, setOption] = useState("Both");
+  const [data, setData] = useState([]);
+  const [transData, setTransData] = useState([]);
+  const [revData, setRevData] = useState([]);
   const [filterData, setFilterData] = useState([]);
-  const [, setFilteredData] = useState([]);
   const [searchInput, setSearchInput] = useState("");
-  const [selectedValue, setSelectedValue] = useState("option1");
 
   useEffect(() => {
+    const getdata = async () => {
+      await axios
+        .get("http://localhost:3008/getuserdata")
+        .then((response) => {
+          setData(response.data);
+          setTransData(
+            response.data.filter((user) =>
+              user.role_name.includes("Translator")
+            )
+          );
+          setRevData(
+            response.data.filter((user) => 
+              user.role_name.includes("Reviewer"))
+          );
+          if (option === "Both") {
+            setFilterData(response.data);
+          } else {
+            setFilterData(
+              response.data.filter((user) => user.role_name.includes(option))
+            );
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
     getdata();
-  }, [IsDeleted]);
-
-  const getdata = async () => {
-    await axios
-      .get("http://localhost:3008/getuserdata")
-      .then((response) => {
-        setData(response.data);
-        setIsFiltered(response.data);
-        setFilteredData(response.data);
-        setFilterData(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  }, [IsDeleted, option]);
 
   const handleRole = async (event) => {
     try {
@@ -46,20 +59,39 @@ function App() {
     console.log(e.target.value);
     if (e.target.value === "") {
       setSearchInput("");
-      setIsFiltered(data);
-      setFilterData(data);
+      if (option === "Both") {
+        setFilterData(data);
+      } else if (option === "Translator") {
+        setFilterData(transData);
+      } else {
+        setFilterData(revData);
+      }
     } else {
       setSearchInput(e.target.value);
     }
   };
 
-  const handleSearchSubmit = (List) => {
+  const handleSearchSubmit = () => {
     console.log(`Searching for: ${searchInput}`);
-    let filtered = List.filter((user) =>
-      user.username.toLowerCase().includes(searchInput.toLowerCase())
-    );
-    setIsFiltered(data);
-    setFilterData(filtered);
+    if (option === "Both") {
+      setFilterData(
+        data.filter((user) =>
+          user.username.toLowerCase().includes(searchInput.toLowerCase())
+        )
+      );
+    } else if (option === "Translator") {
+      setFilterData(
+        transData.filter((user) =>
+          user.username.toLowerCase().includes(searchInput.toLowerCase())
+        )
+      );
+    } else {
+      setFilterData(
+        revData.filter((user) =>
+          user.username.toLowerCase().includes(searchInput.toLowerCase())
+        )
+      );
+    }
   };
 
   const handleChange = async (res) => {
@@ -68,6 +100,7 @@ function App() {
         `http://localhost:3008/updateuserdata/${res}`,
         { role: UpdatedRole, id: res }
       );
+      setIsDeleted(!IsDeleted);
       console.log(response);
     } catch (error) {
       console.error(error);
@@ -90,26 +123,22 @@ function App() {
     }
   };
 
-  const filterByBoth = (List) => {
-    let filtered = List;
-    setIsFiltered(filtered);
-    setFilterData(filtered);
+  const filterByBoth = () => {
+    setOption("Both");
+    setFilterData(data);
   };
 
-  const filterByTra = (List) => {
-    let filtered = List.filter((user) => user.role_name.includes("Translator"));
-    setIsFiltered(filtered);
-    setFilterData(filtered);
+  const filterByTra = () => {
+    setOption("Translator");
+    setFilterData(transData);
   };
-
-  const filterByRev = (List) => {
-    let filtered = List.filter((user) => user.role_name.includes("Reviewer"));
-    setIsFiltered(filtered);
-    setFilterData(filtered);
+  const filterByRev = () => {
+    setOption("Reviewer");
+    setFilterData(revData);
   };
 
   const handleRoleChange = (event) => {
-    setSelectedValue(event.target.value);
+    setOption(event.target.value);
   };
 
   return (
@@ -137,29 +166,29 @@ function App() {
         </div>
       </div>
       <div className="navibar">
-        <button className="home">
+        <button className="home1">
           {" "}
           <span class="material-symbols-outlined">home</span>HOME
         </button>
         <br></br>
-        <button className="home">
+        <button className="home2">
           {" "}
           <span class="material-symbols-outlined">add_task</span> ASSIGN TASK
         </button>
         <br></br>
         <div className="Group_button">
-          <button className="home">
+          <button className="home3">
             {" "}
             <span class="material-symbols-outlined">group</span>GROUPS
           </button>
           <br></br>
         </div>
-        <button className="home">
+        <button className="home4">
           {" "}
           <span class="material-symbols-outlined">help</span>HELP
         </button>
         <br></br>
-        <button className="home">
+        <button className="home5">
           {" "}
           <span class="material-symbols-outlined">logout</span>LOGOUT
         </button>
@@ -172,7 +201,7 @@ function App() {
           <p className="group">Groups</p>
         </div>
         <div className="searchelement">
-          <form onSubmit={handleSearchSubmit}>
+          <form>
             <input
               className="web"
               type="text"
@@ -184,7 +213,7 @@ function App() {
           <button
             className="buttonsearch"
             onClick={() => {
-              handleSearchSubmit(isFilter);
+              handleSearchSubmit();
             }}
             type="sumbit"
           >
@@ -195,33 +224,33 @@ function App() {
           <input
             type="radio"
             name="usertype"
-            value="option1"
+            value="Both"
             onClick={() => {
               filterByBoth(data);
             }}
-            checked={selectedValue === "option1"}
+            checked={option === "Both"}
             onChange={handleRoleChange}
           />
-          Both  {" "}
+          Both  {" "}
           <input
             type="radio"
             name="usertype"
-            value="option2"
+            value="Translator"
             onClick={() => {
               filterByTra(data);
             }}
-            checked={selectedValue === "option2"}
+            checked={option === "Translator"}
             onChange={handleRoleChange}
           />
-          Translator  {" "}
+          Translator  {" "}
           <input
             type="radio"
             name="usertype"
-            value="option3"
+            value="Reviewer"
             onClick={() => {
               filterByRev(data);
             }}
-            checked={selectedValue === "option3"}
+            checked={option === "Reviewer"}
             onChange={handleRoleChange}
           />
           Reviewer
@@ -242,7 +271,7 @@ function App() {
               })
               .map((item) => (
                 <tr key={item.id}>
-                  <td>{item.username}</td>
+                  <td name={item.id}>{item.username}</td>
                   <td>
                     <select
                       defaultValue={item.role_name}
@@ -273,7 +302,7 @@ function App() {
                         handleDelete(item.id);
                       }}
                     >
-                      Delete
+                     Delete
                     </button>
                   </td>
                 </tr>

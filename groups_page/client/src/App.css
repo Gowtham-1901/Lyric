@@ -124,17 +124,18 @@ select {
   margin-left: 400px;
 }
 
-.home {
+.home1, .home2, .home3, .home4, .home5 {
   background-color: transparent;
   display: inline-flex;
   padding: 10px;
 }
 
-.home:hover {
+.home1:hover, .home2:hover, .home3:hover, .home4:hover, .home5:hover {
   font-size: large;
   transition: 0.5s ease-in-out;
   margin-right: 25px;
 }
+
 
 .buttonsearch {
   padding-bottom: 20px;

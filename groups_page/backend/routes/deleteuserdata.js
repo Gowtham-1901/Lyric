@@ -7,7 +7,6 @@ const pool = require("../config/db");
 // deleting a particular user
 router.delete('/deleteuserdata', async (req, res) => {
     const {id} = req.body
-    console.log(id)
     try{
         const result = await pool.query("UPDATE user_table SET isactive = false  WHERE id = $1", [id]);
         console.log(result.rowCount)

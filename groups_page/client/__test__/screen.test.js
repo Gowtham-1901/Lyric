@@ -13,7 +13,7 @@ jest.mock('react-router-dom', () => ({
 describe('Groups', () => {
 
   it('renders the component', () => {
-    render(<App />);
-    expect(screen.getByText('Groups')).toBeInTheDocument();
+    render(<App/>);
+    expect(screen.getByText("Groups")).toBeInTheDocument();
   });
 });
