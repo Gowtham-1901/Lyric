@@ -44,9 +44,9 @@ function App() {
         });
     };
     getdata();
-  }, [IsDeleted, option]);
+  }, [IsDeleted]);
 
-  const handleRole = async (event) => {
+  const  handleRole = async (event) => {
     try {
       let role = event.target.value;
       setUpdatedRole(role);
@@ -265,7 +265,6 @@ function App() {
           </thead>
           <tbody>
             {filterData
-              .slice()
               .sort((a, b) => {
                 return a.username.localeCompare(b.username);
               })
